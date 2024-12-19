@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib",
+    "declaration": true,
+    "declarationDir": "./lib",
+    "module": "commonjs",
+    "target": "es6",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.test.ts"]
+}
