@@ -7,6 +7,12 @@ export class CapitalizeWord{
         this.word = word;
     }
 
+    /**
+     * Capitalizes the first letter of each word in the string.
+     *
+     * @returns {string} The capitalized string.
+     * @throws {HttpException} If an error occurs during capitalization.
+     */
     static create(word: string): string{
         return new CapitalizeWord(word).capitalize();
     }
