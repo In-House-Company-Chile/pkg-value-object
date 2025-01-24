@@ -8,6 +8,13 @@ export class XmlToJson {
     this.xml = xml;
   }
 
+  /**
+   * Converts an XML string to a JSON string.
+   *
+   * @param {string} xml - The XML string to be converted.
+   * @returns {Promise<string>} A promise that resolves to the JSON string representation of the XML.
+   * @throws {HttpException} Throws an HttpException if an error occurs during conversion.
+   */
   static create(xml: string) {
     return new XmlToJson(xml).convert();
   }
@@ -31,9 +38,7 @@ export class XmlToJson {
       });
     } catch (e: any) {
       const errorStatus = e.status ? e.status : HttpStatus.BAD_REQUEST;
-      const errorResponse = e.response && e.response.data ? e.response.data : e
-.response;
-      throw new HttpException(errorResponse, errorStatus);
+      throw new HttpException(e, errorStatus);
     }
   }
 }

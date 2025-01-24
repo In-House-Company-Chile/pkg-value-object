@@ -11,6 +11,14 @@ export class DocToTxt {
         this.outputPath = outputPath;
     }
 
+    /**
+     * Extracts text content from a Word document and writes it to a specified output file.
+     *
+     * @param filePath - The path to the input Word document file.
+     * @param outputPath - The path to the output text file where the extracted content will be saved.
+     * @returns A promise that resolves when the extraction and writing process is complete.
+     * @throws HttpException - Throws an HttpException with the error status if an error occurs during extraction or writing.
+     */
     static async create(filePath: string, outputPath: string): Promise<void> {
         return await new DocToTxt(filePath, outputPath).extract();
     }
@@ -22,8 +30,7 @@ export class DocToTxt {
             fs.writeFileSync(this.outputPath, documento.getBody());
         } catch (e: any) {
             const errorStatus = e.status ? e.status : HttpStatus.BAD_REQUEST;
-            const errorResponse = e.response && e.response.data ? e.response.data : e
-            throw new HttpException(errorResponse, errorStatus);
+            throw new HttpException(e, errorStatus);
         }
     }
 }

@@ -8,21 +8,15 @@ export class ValidateEmail {
     }
 
     /**
-     * Creates a new instance of ValidateEmail and validates the given email.
-     * 
-     * @param email - The email to be validated.
-     * @returns The validated email.
+     * Validates the given email string to ensure it follows the standard email format.
+     *
+     * @param email - The email string to be validated.
+     * @returns The validated email string if it is in the correct format.
+     * @throws HttpException - Throws an exception if the email is invalid or if an error occurs during validation.
      */
     static create(email: string): string {
         return new ValidateEmail(email).validate();
     }
-
-    /**
-     * Validates the email address.
-     * 
-     * @returns The validated email address.
-     * @throws {HttpException} If the email is invalid.
-     */
     validate(): string {
         try {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -31,8 +25,7 @@ export class ValidateEmail {
             return this.email;
         } catch (e: any) {
             const errorStatus = e.status ? e.status : HttpStatus.BAD_REQUEST;
-            const errorResponse = e.response && e.response.data ? e.response.data : e
-            throw new HttpException(errorResponse, errorStatus);
+            throw new HttpException(e, errorStatus);
         }
     };
 };

@@ -13,10 +13,18 @@ export class XmlToTxt {
         this.xml = xml;
     }
 
+    /**
+     * Converts an XML string to a text file.
+     * 
+     * @param filePath - The path where the XML file will be temporarily saved.
+     * @param outputPath - The path where the resulting text file will be saved.
+     * @param xml - The XML string to be converted.
+     * @returns A promise that resolves when the conversion is complete.
+     * @throws HttpException - Throws an exception if an error occurs during the conversion process.
+     */
     static async create(filePath: string, outputPath: string, xml: string): Promise<void> {
         return await new XmlToTxt(filePath, outputPath, xml).convertToTxt();
     }
-
 
     async convertToTxt(): Promise<void> {
         const xmlFilePath = this.filePath;
@@ -46,8 +54,7 @@ export class XmlToTxt {
             fs.writeFileSync(this.outputPath, textContent.trim());
         } catch (e: any) {
             const errorStatus = e.status ? e.status : HttpStatus.BAD_REQUEST;
-            const errorResponse = e.response && e.response.data ? e.response.data : e
-            throw new HttpException(errorResponse, errorStatus);
+            throw new HttpException(e, errorStatus);
         }
     };
 }

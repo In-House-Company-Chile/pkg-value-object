@@ -11,6 +11,13 @@ export class TxtToPdf {
         this.outputPath = outputPath;
     }
 
+    /**
+     * Converts a text file to a PDF file.
+     *
+     * @param {string} filePath - The path to the input text file.
+     * @param {string} outputPath - The path to the output PDF file.
+     * @throws {HttpException} Throws an HttpException if an error occurs during the conversion process.
+     */
     static create(filePath: string, outputPath: string): void {
         return new TxtToPdf(filePath, outputPath).convert();
     }
@@ -33,8 +40,7 @@ export class TxtToPdf {
             doc.end();
         } catch (e: any) {
             const errorStatus = e.status ? e.status : HttpStatus.BAD_REQUEST;
-            const errorResponse = e.response && e.response.data ? e.response.data : e
-            throw new HttpException(errorResponse, errorStatus);
+            throw new HttpException(e, errorStatus);
         }
     }
 

@@ -8,6 +8,13 @@ export class ValidatePassword{
         this.password = password;
     }
 
+    /**
+     * Validates the given password against a predefined regex pattern and encrypts it if valid.
+     * 
+     * @param password - The password string to be validated.
+     * @returns A promise that resolves to the encrypted password string if validation is successful.
+     * @throws {HttpException} If the password does not match the required format or if an error occurs during encryption.
+     */
     static create(password: string): Promise<string> {
         return new ValidatePassword(password).validate();
     }
@@ -20,8 +27,7 @@ export class ValidatePassword{
             return await EncryptData.create(this.password);
         } catch (e: any) {
             const errorStatus = e.status ? e.status : HttpStatus.BAD_REQUEST;
-            const errorResponse = e.response && e.response.data ? e.response.data : e
-            throw new HttpException(errorResponse, errorStatus);
+            throw new HttpException(e, errorStatus);
         }
     };
 };

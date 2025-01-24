@@ -8,10 +8,11 @@ export class CapitalizeWord{
     }
 
     /**
-     * Capitalizes the first letter of each word in the string.
+     * Capitalizes the first letter of each word in a given string.
      *
-     * @returns {string} The capitalized string.
-     * @throws {HttpException} If an error occurs during capitalization.
+     * @param word - The string to be capitalized.
+     * @returns The capitalized string.
+     * @throws HttpException - If an error occurs during the capitalization process.
      */
     static create(word: string): string{
         return new CapitalizeWord(word).capitalize();

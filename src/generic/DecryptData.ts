@@ -10,6 +10,14 @@ export class DecryptData {
         this.hash = hash;
     };
 
+    /**
+     * Decrypts the given data using the provided hash and checks if they match.
+     *
+     * @param data - The data to be decrypted.
+     * @param hash - The hash to compare against the decrypted data.
+     * @returns A promise that resolves to a boolean indicating whether the data matches the hash.
+     * @throws {HttpException} If an error occurs during decryption, an HttpException is thrown with the appropriate status.
+     */
     static async create(data: string, hash: string): Promise<boolean> {
         return await new DecryptData(data, hash).decrypt();
     };
@@ -20,8 +28,7 @@ export class DecryptData {
             return match;
         } catch (e: any) {
             const errorStatus = e.status ? e.status : HttpStatus.BAD_REQUEST;
-            const errorResponse = e.response && e.response.data ? e.response.data : e
-            throw new HttpException(errorResponse, errorStatus);
+            throw new HttpException(e, errorStatus);
         }
     };
 };

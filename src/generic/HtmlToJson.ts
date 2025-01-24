@@ -2,10 +2,32 @@ import { HttpStatus, HttpException } from '@nestjs/common';
 import { JSDOM } from 'jsdom';
 
 export class HtmlToJson {
+    readonly html: string;
+    readonly tag: string;
+
+    constructor(html: string, tag: string) {
+        this.html = html;
+        this.tag = tag;
+    }
+
+    /**
+     * Converts the given HTML string to JSON format.
+     *
+     * @param html - The HTML string to be converted.
+     * @param tag - The tag to be used in the conversion process.
+     * @returns The JSON object of the HTML string.
+     * @throws {HttpException} If an error occurs during the conversion process, an HttpException is thrown with the appropriate status.
+     */
+
+
     static create(html: string, tag: string): any {
+        return new HtmlToJson(html, tag).convert();
+    }
+
+    convert(): any {
         try {
-            const dom = new JSDOM(html);
-            const divElement = dom.window.document.querySelector(tag);
+            const dom = new JSDOM(this.html);
+            const divElement = dom.window.document.querySelector(this.tag);
 
             const nodeToJson = (node: any) => {
                 let obj: any = {
@@ -34,8 +56,7 @@ export class HtmlToJson {
             return divJson;
         } catch (e: any) {
             const errorStatus = e.status ? e.status : HttpStatus.BAD_REQUEST;
-            const errorResponse = e.response && e.response.data ? e.response.data : e
-            throw new HttpException(errorResponse, errorStatus);
+            throw new HttpException(e, errorStatus);
         }
     }
 }
