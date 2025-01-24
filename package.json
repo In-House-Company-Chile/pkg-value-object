@@ -1,6 +1,6 @@
 {
-  "name": "validation-functions-in-house",
-  "version": "1.0.2",
+  "name": "pkg-value-object",
+  "version": "1.1.0",
   "private": true,
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -26,6 +26,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "@nestjs/common": "^11.0.5",
     "bcrypt": "^5.1.1",
     "validator": "^13.12.0"
   },
