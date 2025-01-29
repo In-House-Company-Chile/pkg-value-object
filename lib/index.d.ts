@@ -18,3 +18,5 @@ export { ValidateId } from './generic/ValidateId';
 export { ValidatePassword } from './generic/ValidatePassword';
 export { XmlToJson } from './generic/XmlToJson';
 export { XmlToTxt } from './generic/XmlToTxt';
+export { PdfToTxt } from './generic/PdfToTxt';
+export { NormalizeWord } from './generic/NormalizeWord';
