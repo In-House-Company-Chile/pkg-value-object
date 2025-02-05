@@ -23,6 +23,7 @@
     "@types/node": "^20.14.6",
     "@types/pdf-parse": "^1.1.4",
     "@types/pdfkit": "^0.13.8",
+    "@types/string-similarity": "^4.0.2",
     "@types/validator": "^13.12.0",
     "@types/word-extractor": "^1.0.6",
     "@types/xml2js": "^0.4.14",
@@ -38,6 +39,7 @@
     "pdf-lib": "^1.17.1",
     "pdf-parse": "^1.1.1",
     "pdfkit": "^0.16.0",
+    "string-similarity": "^4.0.4",
     "validator": "^13.12.0",
     "word-extractor": "^1.0.4",
     "xml2js": "^0.6.2"
